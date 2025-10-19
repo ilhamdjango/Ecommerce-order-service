@@ -1,5 +1,5 @@
 [project]
-name = "shop-service"
+name = "order-service"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -18,4 +18,6 @@ dependencies = [
     "python-dotenv>=1.1.1",
     "whitenoise>=6.5",
     "psycopg[binary] (>=3.2.10,<4.0.0)",
+    "drf-yasg>=1.21.7",
+
 ]
