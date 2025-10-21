@@ -107,11 +107,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'URL': os.getenv('DATABASE_URL'),
-            'NAME': os.getenv('POSTGRES_DB'),
-            'USER': os.getenv('POSTGRES_USER'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-            'HOST': os.getenv('POSTGRES_HOST', 'db'),
+            'URL': os.getenv('DATABASE_URL', 'postgresql://test:LqjnHzmC9VbGU2nfBjiv6G3yYXgVPOT1@dpg-d3oum9p5pdvs73a7dtug-a/order_service_1ook'),
+            'NAME': os.getenv('POSTGRES_DB', 'order_service_1ook'),
+            'USER': os.getenv('POSTGRES_USER', 'test'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'LqjnHzmC9VbGU2nfBjiv6G3yYXgVPOT1'),
+            'HOST': os.getenv('POSTGRES_HOST', 'dpg-d3oum9p5pdvs73a7dtug-a'),
             'PORT': os.getenv('POSTGRES_PORT', '5432'),
             'CONN_MAX_AGE': 600,  
             'OPTIONS': {
