@@ -19,16 +19,12 @@ DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = [
     "localhost",
-    "127.0.0.1",
-    "ecommerce-order-service-tibsudbtnq-ew.a.run.app",
-    "ecommerce-order-service-944724518299.europe-west1.run.app",
+    "127.0.0.1"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "https://ecommerce-order-service-tibsudbtnq-ew.a.run.app",
-    "https://ecommerce-order-service-944724518299.europe-west1.run.app",
+    "http://127.0.0.1:8080"
 ]
 
 # Cors settings
@@ -109,7 +105,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql',
             'URL': os.getenv('DATABASE_URL', 'postgresql://test:LqjnHzmC9VbGU2nfBjiv6G3yYXgVPOT1@dpg-d3oum9p5pdvs73a7dtug-a/order_service_1ook'),
             'NAME': os.getenv('POSTGRES_DB', 'order_service_1ook'),
-            'USER': os.getenv('POSTGRES_USER', 'test'),
+            'USER': os.getenv('POSTGRES_USER', 'postgre'),
             'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'LqjnHzmC9VbGU2nfBjiv6G3yYXgVPOT1'),
             'HOST': os.getenv('POSTGRES_HOST', 'dpg-d3oum9p5pdvs73a7dtug-a'),
             'PORT': os.getenv('POSTGRES_PORT', '5432'),
