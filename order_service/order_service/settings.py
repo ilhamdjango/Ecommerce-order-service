@@ -20,13 +20,13 @@ DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "ecommerce-order-service-a9fh.onrender.com"
+    "ecommerce-order-service-a9fh.onrender.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
-    "https://ecommerce-order-service-a9fh.onrender.com"
+    "https://ecommerce-order-service-a9fh.onrender.com",
 ]
 
 # Cors settings
