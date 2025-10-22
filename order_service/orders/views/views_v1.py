@@ -7,6 +7,7 @@ from rest_framework import status
 from ..models import * 
 from ..serializers import *
 from ..producer import publish
+from ..consumer import callback
 
 
 #Order Create
@@ -113,7 +114,7 @@ def create_order_from_shopcart(request):
             return Response(item_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-    return Response({"message": "Order and items created successfully"}, status=status.HTTP_201_CREATED)
+    return Response({"message": callback()}, status=status.HTTP_201_CREATED)
 
 @api_view(['PATCH'])
 def update_order_item_status(request, pk):
