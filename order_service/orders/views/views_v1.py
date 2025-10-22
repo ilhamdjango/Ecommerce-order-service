@@ -113,7 +113,7 @@ def create_order_from_shopcart(request):
             return Response(item_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-    return Response({"message": publish()}, status=status.HTTP_201_CREATED)
+    return Response({"message": "Order and items created successfully"}, status=status.HTTP_201_CREATED)
 
 @api_view(['PATCH'])
 def update_order_item_status(request, pk):
