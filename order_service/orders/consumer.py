@@ -9,7 +9,8 @@ channel = connection.channel()
 channel.queue_declare(queue='Ecommerce-order-service')
 
 def callback(ch, method, properties, body):
-    pass
+    print('Received in Order Service')
+    print(body)
 
 channel.basic_consume(queue='Ecommerce-order-service', on_message_callback=callback)
 
