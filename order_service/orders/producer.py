@@ -9,3 +9,4 @@ channel = connection.channel()
 def publish(method, body):
     properties = pika.BasicProperties(method)
     channel.basic_publish(exchange='', routing_key='Ecommerce-order-service', body='hello')
+    return body
