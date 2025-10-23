@@ -8,6 +8,7 @@ from ..models import *
 from ..serializers import *
 from ..producer import publish
 from ..consumer import callback
+from ..celery.task import send_user_data
 
 
 #Order Create
@@ -101,6 +102,7 @@ def create_order_from_shopcart(request):
     order_serializer = OrderSerializer(data=data)
     if order_serializer.is_valid():
         order = order_serializer.save()
+        send_user_data.delay(user.id)
     else:
         return Response(order_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

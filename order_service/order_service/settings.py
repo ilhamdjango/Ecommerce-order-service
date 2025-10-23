@@ -177,3 +177,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 print(f"🚀 Django starting... Debug={DEBUG}, Port={os.getenv('PORT')}")
+
+#Rabbit MQ
+CELERY_BROKER_URL = 'amqps://cxssijuj:MHbrwwU43FaDiUCiW7efAy-_BMuVwgiE@seal.lmq.cloudamqp.com/cxssijuj'
+CELERY_RESULT_BACKEND = 'rpc://'  # optional, nəticəni saxlamaq üçün
