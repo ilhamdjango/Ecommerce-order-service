@@ -6,9 +6,7 @@ from rest_framework import status
 
 from ..models import * 
 from ..serializers import *
-from ..producer import publish
-from ..consumer import callback
-from ..celery.task import send_user_data
+from ..celery.task import test_order_task
 
 
 #Order Create
@@ -102,7 +100,6 @@ def create_order_from_shopcart(request):
     order_serializer = OrderSerializer(data=data)
     if order_serializer.is_valid():
         order = order_serializer.save()
-        send_user_data.delay(user.id)
     else:
         return Response(order_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -116,7 +113,7 @@ def create_order_from_shopcart(request):
             return Response(item_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-    return Response({"message": "Order and items created successfully"}, status=status.HTTP_201_CREATED)
+    return Response({"message": test_order_task(123)}, status=status.HTTP_201_CREATED)
 
 @api_view(['PATCH'])
 def update_order_item_status(request, pk):
