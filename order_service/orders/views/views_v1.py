@@ -6,7 +6,7 @@ from rest_framework import status
 
 from ..models import * 
 from ..serializers import *
-from ..celery.task import test_order_task
+from ..celery.task_receice import process_user_data 
 
 
 #Order Create
@@ -113,7 +113,7 @@ def create_order_from_shopcart(request):
             return Response(item_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-    return Response({"message": test_order_task(123)}, status=status.HTTP_201_CREATED)
+    return Response({"message": process_user_data(123)}, status=status.HTTP_201_CREATED)
 
 @api_view(['PATCH'])
 def update_order_item_status(request, pk):
