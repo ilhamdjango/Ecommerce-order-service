@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:16-alpine
@@ -34,10 +36,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_HOST: db
       POSTGRES_PORT: ${POSTGRES_PORT}
-       # RabbitMQ parametrləri
-      RABBITMQ_HOST: host.docker.internal  # RabbitMQ konteyneri ayrı işləyirsə
-      RABBITMQ_USER: admin
-      RABBITMQ_PASS: admin
+      # CloudAMQP-dən istifadə olunduğu üçün əlavə RabbitMQ service lazım deyil
     volumes:
       - ./:/app:rw
       - media:/app/order_service/media
@@ -46,14 +45,25 @@ services:
       - "${WEB_PORT:-8080}:8080"
     networks:
       - internal_net
+    restart: unless-stopped
+
+  celery:
+    build: .
+    container_name: ecommerce-celery
+    command: celery -A order_service worker --loglevel=info
+    depends_on:
+      - web
+    env_file:
+      - .env
+    networks:
+      - internal_net
+    restart: unless-stopped
 
 volumes:
   pgdata:
   media:
   staticfiles:
-  rabbitmq_data:
 
 networks:
   internal_net:
-  # internal: true
     driver: bridge
