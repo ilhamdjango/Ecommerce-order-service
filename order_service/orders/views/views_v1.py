@@ -6,8 +6,7 @@ from rest_framework import status
 
 from ..models import * 
 from ..serializers import *
-from ..celery.task_receice import process_user_data 
-
+from order_service.tasks import send_order_delivered_event
 
 #Order Create
 @api_view(['GET', 'POST'])
@@ -126,6 +125,9 @@ def update_order_item_status(request, pk):
     if new_status not in dict(OrderItem.Status.choices):
         return Response({"error": "Invalid status"}, status=status.HTTP_400_BAD_REQUEST)
 
+    if new_status==4:
+        send_order_delivered_event(order_id=item.order.id)
+
     item.status = new_status
     item.save()
 
@@ -133,3 +135,4 @@ def update_order_item_status(request, pk):
 
     serializer = OrderItemSerializer(item)
     return Response(serializer.data, status=status.HTTP_200_OK)
+

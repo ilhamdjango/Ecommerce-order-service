@@ -34,6 +34,10 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_HOST: db
       POSTGRES_PORT: ${POSTGRES_PORT}
+       # RabbitMQ parametrləri
+      RABBITMQ_HOST: host.docker.internal  # RabbitMQ konteyneri ayrı işləyirsə
+      RABBITMQ_USER: admin
+      RABBITMQ_PASS: admin
     volumes:
       - ./:/app:rw
       - media:/app/order_service/media
@@ -42,17 +46,6 @@ services:
       - "${WEB_PORT:-8080}:8080"
     networks:
       - internal_net
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"     # AMQP port (RabbitMQ üçün əsas port)
-      - "1883:1883"   # Web UI port (RabbitMQ idarə paneli)
-    environment:
-      RABBITMQ_DEFAULT_USER: cxssijuj
-      RABBITMQ_DEFAULT_PASS: MHbrwwU43FaDiUCiW7efAy-_BMuVwgiE
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq  # Məlumatların saxlanması üçün
 
 volumes:
   pgdata:
